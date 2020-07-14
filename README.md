@@ -1,14 +1,14 @@
-# blancoValueObjectTs
+# blancoVeeValidate
 
-このプロジェクトはblancoValueObjectのTypeScript版です。上田オリジナル版となります。
+このプロジェクトはblancoVeeValidateのTypeScript版です。上田オリジナル版となります。
 
-blancoValueObjectTs は「バリューオブジェクト定義書」というExcel様式を記入するだけで 簡単に バリューオブジェクトのTypeScriptクラスが作成できるようにするためのツールです。
+blancoVeeValidate は「Validate定義書」というExcel様式を記入するだけで 簡単に VeeValidate 用のvalidationスタブクラスと、多言語対応したエラーメッセージが作成できるようにするためのツールです。
 
- 1.ごく普通の バリューオブジェクトのためのソースコードを生成します。
+ 1.ごく普通の TypeScriptソースコードを生成します。
  2.生成後のソースコードは それ単独で動作することができます。余計な *.jarファイルなどの実行時ライブラリを一切必要としません。
  3.導入すると、ドキュメントとソースコードが必ず一致するという効果があります。
 
-いまのところblancoValueObjectTsは本家にはありません。
+いまのところ blancoVeeValidate は本家にはありません。
 
 ## maven 対応について
 

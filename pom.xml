@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>blanco.vuecomponent</groupId>
-	<artifactId>blanco-vuecomponent</artifactId>
+	<groupId>blanco.veevalidate</groupId>
+	<artifactId>blanco-veevalidate</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.6</version>
-	<name>blanco-vuecomponent</name>
+	<version>0.0.1</version>
+	<name>blanco-veevalidate</name>
 	<url>https://igapyon.github.io/blancofw-maven2</url>
 
 	<!-- basic spec for jar -->
@@ -264,22 +264,6 @@
 							<goal>run</goal>
 						</goals>
 					</execution>
-
-<!--					<execution>-->
-<!--						<id>blanco-meta-valueobject-test</id>-->
-<!--						<phase>generate-test-sources</phase>-->
-<!--						<configuration>-->
-<!--							<target>-->
-<!--								<taskdef name="blancovalueobjectTs" classname="blanco.valueobject.task.BlancovalueobjectTsTask" classpathref="maven.runtime.classpath">-->
-<!--								</taskdef>-->
-<!--								<blancovalueobject metadir="meta/objects" encoding="${project.build.sourceEncoding}" sheetType="php" tmpdir="tmpTest" targetdir="sample/blanco" targetStyle="maven" verbose="true" />-->
-<!--							</target>-->
-<!--						</configuration>-->
-<!--						<goals>-->
-<!--							<goal>run</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-
 					<execution>
 						<id>blanco-clean</id>
 						<phase>clean</phase>

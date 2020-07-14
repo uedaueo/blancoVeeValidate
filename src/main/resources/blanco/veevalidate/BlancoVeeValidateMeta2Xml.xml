@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- blancoCalcParser define file for blancoValueObject -->
+<blanco version="0.1.0">
+  <target name="blancoCalcParser">
+    <blancocalcparser name="veevalidate">
+      <propertyblock name="blancoveevalidate-common" waitY="1">
+        <startstring>Validate定義・共通</startstring>
+        <propertykey name="name" waitX="2">
+          <value>Rule ID</value>
+        </propertykey>
+        <propertykey name="validator" waitX="2">
+          <value>Validator ID</value>
+        </propertykey>
+        <propertykey name="package" waitX="2">
+          <value>パッケージ</value>
+        </propertykey>
+        <propertykey name="basedir" waitX="2">
+          <value>配置ディレクトリ</value>
+        </propertykey>
+          <propertykey name="impledir" waitX="2">
+          <value>実装ディレクトリ</value>
+        </propertykey>
+        <propertykey name="description" waitX="2">
+          <value>説明</value>
+        </propertykey>
+        <propertykey name="fileDescription" waitX="2">
+          <value>ファイル説明</value>
+        </propertykey>
+        <propertykey name="validatorKind" waitX="2">
+          <value>種別</value>
+        </propertykey>
+        <propertykey name="alterMessage" waitX="2">
+          <value>メッセージの差し替え</value>
+        </propertykey>
+        <propertykey name="adjustFieldName" waitX="2">
+          <value>フィールド名の変形</value>
+        </propertykey>
+        <propertykey name="createImportList" waitX="2">
+          <value>import文の自動生成</value>
+        </propertykey>
+
+        <valuemapping>
+          <result>true</result>
+          <source>○</source>
+        </valuemapping>
+        <valuemapping>
+          <result>builtin</result>
+          <source>標準</source>
+        </valuemapping>
+        <valuemapping>
+          <result>custom</result>
+          <source>カスタム</source>
+        </valuemapping>
+        <valuemapping>
+          <result>config</result>
+          <source>config</source>
+        </valuemapping>
+        <valuemapping>
+          <result>message</result>
+          <source>メッセージ</source>
+        </valuemapping>
+      </propertyblock>
+
+      <propertyblock name="blancoveevalidate-extends" waitY="1">
+        <startstring>Validate定義・継承</startstring>
+        <propertykey name="name" waitX="3">
+          <value>クラス名</value>
+        </propertykey>
+        <propertykey name="package" waitX="3">
+          <value>パッケージ</value>
+        </propertykey>
+      </propertyblock>
+
+      <tableblock name="blancoveevalidate-header" waitY="2" titleheight="2" rowname="header">
+        <startstring>Validate定義・ヘッダ情報</startstring>
+        <tablecolumn name="no">
+          <value>No.</value>
+        </tablecolumn>
+        <tablecolumn name="name">
+          <value>ヘッダ記述文</value>
+        </tablecolumn>
+      </tableblock>
+
+      <tableblock name="blancoveevalidate-message" waitY="2" titleheight="2" rowname="message">
+        <startstring>Validate定義・メッセージ</startstring>
+        <tablecolumn name="no">
+          <value>No.</value>
+        </tablecolumn>
+        <tablecolumn name="template">
+          <value>テンプレート</value>
+        </tablecolumn>
+        <tablecolumn name="lang">
+          <value>言語</value>
+        </tablecolumn>
+      </tableblock>
+
+      <tableblock name="blancoveevalidate-list" waitY="2" titleheight="3" rowname="field">
+        <startstring>Validate定義・パラメータ</startstring>
+
+        <tablecolumn name="no">
+          <value>No.</value>
+        </tablecolumn>
+        <tablecolumn name="name">
+          <value>フィールド名</value>
+        </tablecolumn>
+        <tablecolumn name="type">
+          <value>型</value>
+        </tablecolumn>
+        <tablecolumn name="generic">
+          <value>総称型</value>
+        </tablecolumn>
+        <tablecolumn name="default">
+          <value>デフォルト</value>
+        </tablecolumn>
+        <tablecolumn name="required">
+          <value>必須</value>
+        </tablecolumn>
+        <tablecolumn name="nullable">
+          <value>Nullable</value>
+        </tablecolumn>
+        <tablecolumn name="description">
+          <value>説明</value>
+        </tablecolumn>
+
+        <valuemapping>
+          <result>true</result>
+          <source>○</source>
+        </valuemapping>
+      </tableblock>
+
+    </blancocalcparser>
+  </target>
+</blanco>
