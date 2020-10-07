@@ -527,7 +527,6 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         method.setNotnull(true);
         method.setAccess("public");
         method.setStatic(true);
-        method.setAccess("static");
 
         method.getLineList().add("configure(validateConfig);");
         method.getLineList().add("");
