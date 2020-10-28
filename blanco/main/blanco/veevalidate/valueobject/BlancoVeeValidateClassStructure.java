@@ -40,7 +40,7 @@ public class BlancoVeeValidateClassStructure {
      * フィールド: [importList]。
      * デフォルト: [new java.util.ArrayList&lt;java.lang.String&gt;()]。
      */
-    private List<java.lang.String> fImportList = new java.util.ArrayList<java.lang.String>();
+    private List<String> fImportList = new java.util.ArrayList<java.lang.String>();
 
     /**
      * source コードの先頭に書かれるコード群です。
@@ -48,7 +48,7 @@ public class BlancoVeeValidateClassStructure {
      * フィールド: [headerList]。
      * デフォルト: [new java.util.ArrayList&lt;java.lang.String&gt;()]。
      */
-    private List<java.lang.String> fHeaderList = new java.util.ArrayList<java.lang.String>();
+    private List<String> fHeaderList = new java.util.ArrayList<java.lang.String>();
 
     /**
      * 本番時にファイルを配置する際のベースディレクトリ。主にTypeScriptのimport文生成時に使用する事を想定しています。
@@ -77,7 +77,7 @@ public class BlancoVeeValidateClassStructure {
      * フィールド: [descriptionList]。
      * デフォルト: [new java.util.ArrayList&lt;java.lang.String&gt;()]。
      */
-    private List<java.lang.String> fDescriptionList = new java.util.ArrayList<java.lang.String>();
+    private List<String> fDescriptionList = new java.util.ArrayList<java.lang.String>();
 
     /**
      * 定義書の種別。custom/builtin/config/message
@@ -124,7 +124,7 @@ public class BlancoVeeValidateClassStructure {
      * フィールド: [fieldList]。
      * デフォルト: [new java.util.ArrayList&lt;blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure&gt;()]。
      */
-    private List<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure> fFieldList = new java.util.ArrayList<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure>();
+    private List<BlancoVeeValidateFieldStructure> fFieldList = new java.util.ArrayList<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure>();
 
     /**
      * ファイル説明
@@ -139,7 +139,7 @@ public class BlancoVeeValidateClassStructure {
      * フィールド: [message]。
      * デフォルト: [new java.util.ArrayList&lt;&gt;()]。
      */
-    private List<blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure> fMessage = new java.util.ArrayList<>();
+    private List<BlancoVeeValidateMessageStructure> fMessage = new java.util.ArrayList<>();
 
     /**
      * フィールド [name] の値を設定します。
@@ -236,7 +236,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @param argImportList フィールド[importList]に設定する値。
      */
-    public void setImportList(final List<java.lang.String> argImportList) {
+    public void setImportList(final List<String> argImportList) {
         fImportList = argImportList;
     }
 
@@ -248,7 +248,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @return フィールド[importList]から取得した値。
      */
-    public List<java.lang.String> getImportList() {
+    public List<String> getImportList() {
         return fImportList;
     }
 
@@ -259,7 +259,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @param argHeaderList フィールド[headerList]に設定する値。
      */
-    public void setHeaderList(final List<java.lang.String> argHeaderList) {
+    public void setHeaderList(final List<String> argHeaderList) {
         fHeaderList = argHeaderList;
     }
 
@@ -271,7 +271,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @return フィールド[headerList]から取得した値。
      */
-    public List<java.lang.String> getHeaderList() {
+    public List<String> getHeaderList() {
         return fHeaderList;
     }
 
@@ -348,7 +348,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @param argDescriptionList フィールド[descriptionList]に設定する値。
      */
-    public void setDescriptionList(final List<java.lang.String> argDescriptionList) {
+    public void setDescriptionList(final List<String> argDescriptionList) {
         fDescriptionList = argDescriptionList;
     }
 
@@ -360,7 +360,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @return フィールド[descriptionList]から取得した値。
      */
-    public List<java.lang.String> getDescriptionList() {
+    public List<String> getDescriptionList() {
         return fDescriptionList;
     }
 
@@ -485,7 +485,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @param argFieldList フィールド[fieldList]に設定する値。
      */
-    public void setFieldList(final List<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure> argFieldList) {
+    public void setFieldList(final List<BlancoVeeValidateFieldStructure> argFieldList) {
         fFieldList = argFieldList;
     }
 
@@ -497,7 +497,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @return フィールド[fieldList]から取得した値。
      */
-    public List<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure> getFieldList() {
+    public List<BlancoVeeValidateFieldStructure> getFieldList() {
         return fFieldList;
     }
 
@@ -530,7 +530,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @param argMessage フィールド[message]に設定する値。
      */
-    public void setMessage(final List<blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure> argMessage) {
+    public void setMessage(final List<BlancoVeeValidateMessageStructure> argMessage) {
         fMessage = argMessage;
     }
 
@@ -542,7 +542,7 @@ public class BlancoVeeValidateClassStructure {
      *
      * @return フィールド[message]から取得した値。
      */
-    public List<blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure> getMessage() {
+    public List<BlancoVeeValidateMessageStructure> getMessage() {
         return fMessage;
     }
 
@@ -615,26 +615,10 @@ public class BlancoVeeValidateClassStructure {
         target.fValidator = this.fValidator;
         // Name: fImportList
         // Type: java.util.List
-        if (this.fImportList != null) {
-            final java.util.Iterator<java.lang.String> iterator = this.fImportList.iterator();
-            for (; iterator.hasNext();) {
-                java.lang.String loopSource = iterator.next();
-                java.lang.String loopTarget = null;
-                loopTarget = loopSource;
-                target.fImportList.add(loopTarget);
-            }
-        }
+        // フィールド[fImportList]はサポート外の型[java.util.Listjava.lang.String]です。
         // Name: fHeaderList
         // Type: java.util.List
-        if (this.fHeaderList != null) {
-            final java.util.Iterator<java.lang.String> iterator = this.fHeaderList.iterator();
-            for (; iterator.hasNext();) {
-                java.lang.String loopSource = iterator.next();
-                java.lang.String loopTarget = null;
-                loopTarget = loopSource;
-                target.fHeaderList.add(loopTarget);
-            }
-        }
+        // フィールド[fHeaderList]はサポート外の型[java.util.Listjava.lang.String]です。
         // Name: fBasedir
         // Type: java.lang.String
         target.fBasedir = this.fBasedir;
@@ -646,15 +630,7 @@ public class BlancoVeeValidateClassStructure {
         target.fDescription = this.fDescription;
         // Name: fDescriptionList
         // Type: java.util.List
-        if (this.fDescriptionList != null) {
-            final java.util.Iterator<java.lang.String> iterator = this.fDescriptionList.iterator();
-            for (; iterator.hasNext();) {
-                java.lang.String loopSource = iterator.next();
-                java.lang.String loopTarget = null;
-                loopTarget = loopSource;
-                target.fDescriptionList.add(loopTarget);
-            }
-        }
+        // フィールド[fDescriptionList]はサポート外の型[java.util.Listjava.lang.String]です。
         // Name: fValidatorKind
         // Type: java.lang.String
         target.fValidatorKind = this.fValidatorKind;
@@ -672,28 +648,12 @@ public class BlancoVeeValidateClassStructure {
         target.fExtends = this.fExtends;
         // Name: fFieldList
         // Type: java.util.List
-        if (this.fFieldList != null) {
-            final java.util.Iterator<blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure> iterator = this.fFieldList.iterator();
-            for (; iterator.hasNext();) {
-                blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure loopSource = iterator.next();
-                blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure loopTarget = null;
-                // フィールド[generics]はサポート外の型[blanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure]です。
-                target.fFieldList.add(loopTarget);
-            }
-        }
+        // フィールド[fFieldList]はサポート外の型[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure]です。
         // Name: fFileDescription
         // Type: java.lang.String
         target.fFileDescription = this.fFileDescription;
         // Name: fMessage
         // Type: java.util.List
-        if (this.fMessage != null) {
-            final java.util.Iterator<blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure> iterator = this.fMessage.iterator();
-            for (; iterator.hasNext();) {
-                blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure loopSource = iterator.next();
-                blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure loopTarget = null;
-                // フィールド[generics]はサポート外の型[blanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure]です。
-                target.fMessage.add(loopTarget);
-            }
-        }
+        // フィールド[fMessage]はサポート外の型[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure]です。
     }
 }
