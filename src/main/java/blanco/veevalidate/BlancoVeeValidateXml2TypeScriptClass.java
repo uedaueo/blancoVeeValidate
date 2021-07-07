@@ -250,7 +250,10 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             i++;
         }
 
-        sb.append("validate: ValidationRuleFunction = (value, params) => {" + this.getLineSeparator());
+        if (argStructure.getComputesRequired()) {
+            sb.append("computesRequired: boolean = true;" + this.getLineSeparator());
+        }
+        sb.append(this.getTabSpace(1) + "validate: ValidationRuleFunction = (value, params) => {" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) +
                 "return " + argStructure.getValidator() + customRuleSuffix +
                 "(value, params);" +
@@ -279,7 +282,10 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     private String generateBuiltinRuleSchema(BlancoVeeValidateClassStructure argStructure) {
         StringBuffer sb = new StringBuffer();
 
-        sb.append("validate: ValidationRuleFunction = " + argStructure.getValidator() + ".validate;" + this.getLineSeparator());
+        if (argStructure.getComputesRequired()) {
+            sb.append("computesRequired: boolean = true;" + this.getLineSeparator());
+        }
+        sb.append(this.getTabSpace(1) + "validate: ValidationRuleFunction = " + argStructure.getValidator() + ".validate;" + this.getLineSeparator());
         sb.append(this.getTabSpace(1) + "params: RuleParamSchema[] = " + argStructure.getValidator() + ".params;" + this.getLineSeparator());
         sb.append(this.getTabSpace(1) + "message: ValidationMessageTemplate = (field: string, params?: Record<string, any>) => {" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "return " + BlancoVeeValidateConstants.CUSTOM_MESSAGE + "(field, params, " +

@@ -88,12 +88,20 @@ public class BlancoVeeValidateClassStructure {
     private String fValidatorKind = "builtin";
 
     /**
-     * 認証が必要なクラスかどうか
+     * メッセージの差し替え
      *
      * フィールド: [alterMessage]。
      * デフォルト: [false]。
      */
     private Boolean fAlterMessage = false;
+
+    /**
+     * 必須扱いとする。true の時のみ、Schemeクラスに computesRequired: boolean = true; を定義します。
+     *
+     * フィールド: [computesRequired]。
+     * デフォルト: [false]。
+     */
+    private Boolean fComputesRequired = false;
 
     /**
      * フィールド名の名前変形をおこなうかどうか。
@@ -390,7 +398,7 @@ public class BlancoVeeValidateClassStructure {
     /**
      * フィールド [alterMessage] の値を設定します。
      *
-     * フィールドの説明: [認証が必要なクラスかどうか]。
+     * フィールドの説明: [メッセージの差し替え]。
      *
      * @param argAlterMessage フィールド[alterMessage]に設定する値。
      */
@@ -401,13 +409,36 @@ public class BlancoVeeValidateClassStructure {
     /**
      * フィールド [alterMessage] の値を取得します。
      *
-     * フィールドの説明: [認証が必要なクラスかどうか]。
+     * フィールドの説明: [メッセージの差し替え]。
      * デフォルト: [false]。
      *
      * @return フィールド[alterMessage]から取得した値。
      */
     public Boolean getAlterMessage() {
         return fAlterMessage;
+    }
+
+    /**
+     * フィールド [computesRequired] の値を設定します。
+     *
+     * フィールドの説明: [必須扱いとする。true の時のみ、Schemeクラスに computesRequired: boolean = true; を定義します。]。
+     *
+     * @param argComputesRequired フィールド[computesRequired]に設定する値。
+     */
+    public void setComputesRequired(final Boolean argComputesRequired) {
+        fComputesRequired = argComputesRequired;
+    }
+
+    /**
+     * フィールド [computesRequired] の値を取得します。
+     *
+     * フィールドの説明: [必須扱いとする。true の時のみ、Schemeクラスに computesRequired: boolean = true; を定義します。]。
+     * デフォルト: [false]。
+     *
+     * @return フィールド[computesRequired]から取得した値。
+     */
+    public Boolean getComputesRequired() {
+        return fComputesRequired;
     }
 
     /**
@@ -573,6 +604,7 @@ public class BlancoVeeValidateClassStructure {
         buf.append(",descriptionList=" + fDescriptionList);
         buf.append(",validatorKind=" + fValidatorKind);
         buf.append(",alterMessage=" + fAlterMessage);
+        buf.append(",computesRequired=" + fComputesRequired);
         buf.append(",adjustFieldName=" + fAdjustFieldName);
         buf.append(",createImportList=" + fCreateImportList);
         buf.append(",extends=" + fExtends);
@@ -637,6 +669,9 @@ public class BlancoVeeValidateClassStructure {
         // Name: fAlterMessage
         // Type: java.lang.Boolean
         target.fAlterMessage = this.fAlterMessage;
+        // Name: fComputesRequired
+        // Type: java.lang.Boolean
+        target.fComputesRequired = this.fComputesRequired;
         // Name: fAdjustFieldName
         // Type: java.lang.Boolean
         target.fAdjustFieldName = this.fAdjustFieldName;

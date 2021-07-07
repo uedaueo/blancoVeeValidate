@@ -390,6 +390,9 @@ public class BlancoVeeValidateXmlParser {
         argObjClassStructure.setAlterMessage("true".equals(BlancoXmlBindingUtil
                 .getTextContent(argElementCommon, "alterMessage")));
 
+        argObjClassStructure.setComputesRequired("true".equals(BlancoXmlBindingUtil
+                .getTextContent(argElementCommon, "computesRequired")));
+
         argObjClassStructure.setAdjustFieldName("true".equals(BlancoXmlBindingUtil
                 .getTextContent(argElementCommon, "adjustFieldName")));
         argObjClassStructure.setCreateImportList("true"

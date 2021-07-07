@@ -32,6 +32,9 @@
         <propertykey name="alterMessage" waitX="2">
           <value>メッセージの差し替え</value>
         </propertykey>
+        <propertykey name="computesRequired" waitX="2">
+          <value>必須扱いとする</value>
+        </propertykey>
         <propertykey name="adjustFieldName" waitX="2">
           <value>フィールド名の変形</value>
         </propertykey>
