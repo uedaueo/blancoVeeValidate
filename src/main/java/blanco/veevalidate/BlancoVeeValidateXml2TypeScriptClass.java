@@ -28,26 +28,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * バリューオブジェクト用中間XMLファイルから TypeScript ソースコードを自動生成するクラス。
+ * A class that auto-generates TypeScript source code from intermediate XML files for value objects.
  *
- * BlancoValueObjectTsの主たるクラスのひとつです。
+ * This is one of the main classes of BlancoValueObjectTs.
  *
  * @author IGA Tosiki
  * @author tueda
  */
 public class BlancoVeeValidateXml2TypeScriptClass {
     /**
-     * メッセージ。
+     * A message.
      */
     private final BlancoVeeValidateMessage fMsg = new BlancoVeeValidateMessage();
 
     /**
-     * blancoValueObjectのリソースバンドルオブジェクト。
+     * Resource bundle object for blancoValueObject.
      */
     private final BlancoVeeValidateResourceBundle fBundle = new BlancoVeeValidateResourceBundle();
 
     /**
-     * 入力シートに期待するプログラミング言語
+     * A programming language expected for the input sheet.
      */
     private int fSheetLang = BlancoCgSupportedLang.PHP;
 
@@ -56,7 +56,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     }
 
     /**
-     * ソースコード生成先ディレクトリのスタイル
+     * Style of the source code generation destination directory
      */
     private boolean fTargetStyleAdvanced = false;
     public void setTargetStyleAdvanced(boolean argTargetStyleAdvanced) {
@@ -93,27 +93,27 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     private String fConfigFile = "";
 
     /**
-     * 内部的に利用するblancoCg用ファクトリ。
+     * A factory for blancoCg to be used internally.
      */
     private BlancoCgObjectFactory fCgFactory = null;
 
     /**
-     * 内部的に利用するblancoCg用ソースファイル情報。
+     * Source file information for blancoCg to be used internally.
      */
     private BlancoCgSourceFile fCgSourceFile = null;
 
     /**
-     * 内部的に利用するblancoCg用クラス情報。
+     * Class information for blancoCg to be used internally.
      */
     private BlancoCgClass fCgClass = null;
 
     /**
-     * 内部的に利用するblancoCg用インタフェイス情報。
+     * Interface information for blancoCg to be used internally.
      */
     private BlancoCgInterface fCgInterface = null;
 
     /**
-     * 自動生成するソースファイルの文字エンコーディング。
+     * Character encoding of auto-generated source files.
      */
     private String fEncoding = null;
 
@@ -132,25 +132,25 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         final File argDirectoryTarget) throws IOException {
 
         /*
-         * まずはじめに、ValidationRuleSchema を生成します。
+         * The first step is to generate the ValidationRuleSchema.
          */
         generateValidationRuleSchema(argClassStructures, argDirectoryTarget);
 
         /*
-         * 次に各国語のメッセージ定義ファイルを生成します
+         * Next, generates the message the definition files for each language.
          */
         generateValidationMessages(argClassStructures, argDirectoryTarget);
 
 
         /*
-         * 次に設定クラスファイルを生成します。
+         * Then, generates the configuration class file.
          */
         generateConfigClass(argClassStructures, argDirectoryTarget);
 
     }
 
     /**
-     * ValidationRuleSchema を生成します。
+     * Generates ValidationRuleSchema.
      *
      * @param argClassStructures
      * @param argDirectoryTarget
@@ -160,10 +160,8 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             final List<BlancoVeeValidateClassStructure> argClassStructures,
             final File argDirectoryTarget) throws IOException {
         /*
-         * 出力ディレクトリはant taskのtargetStyel引数で
-         * 指定された書式で出力されます。
-         * 従来と互換性を保つために、指定がない場合は blanco/main
-         * となります。
+         * The output directory will be in the format specified by the targetStyle argument of the ant task.
+         * For compatibility, the output directory will be blanco/main if it is not specified.
          * by tueda, 2019/08/30
          */
         String strTarget = argDirectoryTarget
@@ -191,13 +189,13 @@ public class BlancoVeeValidateXml2TypeScriptClass {
 
             String simpleClassName = BlancoNameAdjuster.toClassName(structure.getName()) + schemaSuffix;
             String packageName = BlancoStringUtil.null2Blank(structure.getPackage());
-            // BlancoCgObjectFactoryクラスのインスタンスを取得します。
+            // Gets an instance of BlancoCgObjectFactory class.
             fCgFactory = BlancoCgObjectFactory.getInstance();
-            fCgSourceFile = fCgFactory.createSourceFile(packageName, "このソースコードはblanco Frameworkによって作成されました。");
+            fCgSourceFile = fCgFactory.createSourceFile(packageName, "This source code was created by blanco Framework.");
             fCgSourceFile.setEncoding(fEncoding);
             fCgSourceFile.setTabs(this.getTabs());
 
-            // クラスを作成します。
+            // Creates a class.
             fCgClass = fCgFactory.createClass(simpleClassName, fBundle.getXml2sourceFileValidateRuleSchema());
             fCgSourceFile.getClassList().add(fCgClass);
 
@@ -205,12 +203,12 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             fCgClass.getLangDoc().getDescriptionList().addAll(structure.getDescriptionList());
 
             fCgClass.setAccess("public");
-            // implements ValidationRuleSchema
+            // Implements ValidationRuleSchema
             BlancoCgType impleType = new BlancoCgType();
             fCgClass.getImplementInterfaceList().add(impleType);
             impleType.setName("ValidationRuleSchema");
 
-            // RuleSchema の中身を生成します。
+            // Generates the contents of RuleSchema.
             if ("custom".equalsIgnoreCase(validatorKind)) {
                 fCgClass.getPlainTextList().add(this.generateCustomRuleSchema(structure));
             } else if ("builtin".equalsIgnoreCase(validatorKind)) {
@@ -219,19 +217,19 @@ public class BlancoVeeValidateXml2TypeScriptClass {
                 throw new IllegalArgumentException("Cannot generate RuleSchema for " + validatorKind);
             }
 
-            /* TypeScript では import の代わりに header を設定します */
+            /* In TypeScript, sets the header instead of import. */
             for (String header : structure.getHeaderList()) {
                 fCgSourceFile.getHeaderList().add(header);
             }
 
-            // 収集された情報を元に実際のソースコードを自動生成。
+            // Auto-generates the actual source code based on the collected information.
             BlancoCgTransformerFactory.getTsSourceTransformer().transform(
                     fCgSourceFile, fileBlancoMain);
         }
     }
 
     /**
-     * カスタムルールのschemaを生成します。
+     * Generates the schema for the custom rule.
      * @param argStructure
      * @return
      */
@@ -239,7 +237,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         StringBuffer sb = new StringBuffer();
         String customRuleSuffix = "Validator";
 
-        // はじめにfieldのリストをつくっておきます。
+        // First, makes a list of fields.
         String fields = "";
         int i = 0;
         for (BlancoVeeValidateFieldStructure field : argStructure.getFieldList()) {
@@ -275,7 +273,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     }
 
     /**
-     * 組み込みルールのschemaを生成します。
+     * Generates the schema for the built-in rules.
      * @param argStructure
      * @return
      */
@@ -296,7 +294,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     }
 
     /**
-     * カスタムメッセージを生成します。
+     * Generates a custom message.
      *
      * @param argClassStructures
      * @param argDirectoryTarget
@@ -306,10 +304,8 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             final List<BlancoVeeValidateClassStructure> argClassStructures,
             final File argDirectoryTarget) throws IOException {
         /*
-         * 出力ディレクトリはant taskのtargetStyel引数で
-         * 指定された書式で出力されます。
-         * 従来と互換性を保つために、指定がない場合は blanco/main
-         * となります。
+         * The output directory will be in the format specified by the targetStyle argument of the ant task.
+         * For compatibility, the output directory will be blanco/main if it is not specified.
          * by tueda, 2019/08/30
          */
         String strTarget = argDirectoryTarget
@@ -325,7 +321,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         }
 
         /*
-         * まずはじめに、メッセージクラス定義を検索します。
+         * First, searches for the message class definition.
          */
         BlancoVeeValidateClassStructure messageStructure = searchValidateClassByKind(argClassStructures, "message");
         if (messageStructure == null) {
@@ -339,40 +335,40 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             String simpleClassName = messageStructure.getName() + BlancoNameAdjuster.toClassName(lang);
             String packageName = BlancoStringUtil.null2Blank(messageStructure.getPackage());
 
-            // BlancoCgObjectFactoryクラスのインスタンスを取得します。
+            // Gets an instance of BlancoCgObjectFactory class.
             fCgFactory = BlancoCgObjectFactory.getInstance();
-            fCgSourceFile = fCgFactory.createSourceFile(packageName, "このソースコードはblanco Frameworkによって作成されました。");
+            fCgSourceFile = fCgFactory.createSourceFile(packageName, "This source code was created by blanco Framework.");
             fCgSourceFile.setEncoding(fEncoding);
             fCgSourceFile.setTabs(this.getTabs());
 
-            // クラスを作成します。
+            // Creates a class.
             fCgClass = fCgFactory.createClass(simpleClassName, fBundle.getXml2sourceFileValidateMessage());
             fCgSourceFile.getClassList().add(fCgClass);
             fCgClass.setAccess("public");
 
-            // 継承に対応します。
+            // Supports inheritance.
             if (BlancoStringUtil.null2Blank(messageStructure.getExtends())
                     .length() > 0) {
                 fCgClass.getExtendClassList().add(
                         fCgFactory.createType(messageStructure.getExtends()));
             }
 
-            // メッセージをfieldとして定義していきます。
+            // Defines the message as a field.
             generateValidationMessageLang(lang, argClassStructures);
 
-            /* TypeScript では import の代わりに header を設定します */
+            /* In TypeScript, sets the header instead of import */
             for (String header : messageStructure.getHeaderList()) {
                 fCgSourceFile.getHeaderList().add(header);
             }
 
-            // 収集された情報を元に実際のソースコードを自動生成。
+            // Auto-generates the actual source code based on the collected information.
             BlancoCgTransformerFactory.getTsSourceTransformer().transform(
                     fCgSourceFile, fileBlancoMain);
         }
     }
 
     /**
-     * メッセージを定義するクラス名を探します。
+     * Searches for the class name that defines the message.
      *
      * @param argClassStructures
      * @return
@@ -395,7 +391,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     }
 
     /**
-     * 各言語毎のカスタムメッセージを生成します。
+     * Generates a custom message for each language.
      *
      * @param lang
      * @param argClassStructures
@@ -414,7 +410,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
                 final BlancoCgField field = fCgFactory.createField(ruleId,
                         "string", null);
                 field.setDefault(
-                        // ダブルクオートを付与します。
+                        // Adds double-quotes.
                         "\"" + BlancoJavaSourceUtil.escapeStringAsJavaSource(message.getMessage()) + "\"");
                 field.setAccess("public");
                 field.setNotnull(true);
@@ -423,7 +419,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
                         structure.getValidator() + ": " + BlancoJavaSourceUtil.escapeStringAsJavaSource(message.getMessage())
                 );
                 for (BlancoVeeValidateFieldStructure param: structure.getFieldList()) {
-                    /* パラメータの1行目のみを記載 */
+                    /* Describes only the first line of the parameter. */
                     String desc = param.getDescription();
                     if (desc != null && desc.length() > 0) {
                         field.getLangDoc().getDescriptionList().add(
@@ -439,23 +435,21 @@ public class BlancoVeeValidateXml2TypeScriptClass {
     }
 
     /**
-     * 与えられたクラス情報バリューオブジェクトから、ソースコードを自動生成します。
+     * Auto-generates source code from a given class information value object.
      *
      * @param argClassStructures
-     *            クラス情報
+     *            Class information.
      * @param argDirectoryTarget
-     *            TypeScript ソースコードの出力先ディレクトリ
+     *            Output directory for TypeScript source code.
      * @throws IOException
-     *             入出力例外が発生した場合。
+     *             If an I/O exception occurs.
      */
     public void generateConfigClass(
             final List<BlancoVeeValidateClassStructure> argClassStructures,
             final File argDirectoryTarget) throws IOException {
         /*
-         * 出力ディレクトリはant taskのtargetStyel引数で
-         * 指定された書式で出力されます。
-         * 従来と互換性を保つために、指定がない場合は blanco/main
-         * となります。
+         * The output directory will be in the format specified by the targetStyle argument of the ant task.
+         * For compatibility, the output directory will be blanco/main if it is not specified.
          * by tueda, 2019/08/30
          */
         String strTarget = argDirectoryTarget
@@ -471,27 +465,27 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         }
 
         /*
-         * まずはじめに、Configクラス定義を検索します。
+         * The first step is to seach for the Config class definition.
          */
         BlancoVeeValidateClassStructure configStructure = searchValidateClassByKind(argClassStructures, "config");
         if (configStructure == null) {
             throw new IllegalArgumentException(this.fBundle.getXml2sourceFileErr007());
         }
 
-        // BlancoCgObjectFactoryクラスのインスタンスを取得します。
+        // Gets an instance of BlancoCgObjectFactory class.
         fCgFactory = BlancoCgObjectFactory.getInstance();
 
         fCgSourceFile = fCgFactory.createSourceFile(configStructure
-                .getPackage(), "このソースコードはblanco Frameworkによって作成されました。");
+                .getPackage(), "This source code was created by blanco Framework.");
         fCgSourceFile.setEncoding(fEncoding);
         fCgSourceFile.setTabs(this.getTabs());
 
-        // クラスを作成します。
+        // Creates a class.
         fCgClass = fCgFactory.createClass(configStructure.getName(), this.fBundle.getXml2sourceFileValidateInit());
         fCgSourceFile.getClassList().add(fCgClass);
         fCgClass.setAccess("public");
 
-        // 継承
+        // Inheritance
         if (BlancoStringUtil.null2Blank(configStructure.getExtends())
                 .length() > 0) {
             fCgClass.getExtendClassList().add(
@@ -503,21 +497,21 @@ public class BlancoVeeValidateXml2TypeScriptClass {
                     "javax.xml.bind.annotation.XmlRootElement");
         }
 
-        // クラスのJavaDocを設定します。
+        // Sets the JavaDoc for the class.
         fCgClass.setDescription(configStructure.getDescription());
         for (String line : configStructure.getDescriptionList()) {
             fCgClass.getLangDoc().getDescriptionList().add(line);
         }
 
-        // setupメソッドを生成します。
+        // Generates the setup method.
         buildSetupMethod(argClassStructures, configStructure);
 
-        /* TypeScript では import の代わりに header を設定します */
+        /* In TypeScript, sets the header instead of import. */
         for (String header : configStructure.getHeaderList()) {
             fCgSourceFile.getHeaderList().add(header);
         }
 
-        // 収集された情報を元に実際のソースコードを自動生成。
+        // Auto-generates the actual source code based on the collected information.
         BlancoCgTransformerFactory.getTsSourceTransformer().transform(
                 fCgSourceFile, fileBlancoMain);
     }
@@ -526,7 +520,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             final List<BlancoVeeValidateClassStructure> argClassStructures,
             final BlancoVeeValidateClassStructure argConfigStructure
     ) {
-        // おのおののフィールドに対するゲッターメソッドを生成します。
+        // Generates a getter method for each field.
         final BlancoCgMethod method = fCgFactory.createMethod(BlancoVeeValidateConstants.INIT_METHOD,
                 fBundle.getXml2sourceFileValidateInitMethod());
         fCgClass.getMethodList().add(method);
@@ -541,7 +535,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         List<String> builtinNormal = new ArrayList<>();
         List<String> builtinAlter = new ArrayList<>();
 
-        // まずbuiltinルールを設定します。
+        // First, sets up the builtin rule.
         for (BlancoVeeValidateClassStructure structure : argClassStructures) {
             if ("builtin".equalsIgnoreCase(structure.getValidatorKind())) {
                 boolean isAlter = false;
@@ -583,7 +577,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         method.getLineList().add("/* custom rules */");
 
         List<String> customImport = new ArrayList<>();
-        // 次にカスタムルールを設定します。
+        // Then, sets up the custom rule.
         for (BlancoVeeValidateClassStructure structure : argClassStructures) {
             if ("custom".equalsIgnoreCase(structure.getValidatorKind())) {
                 String validator = "new " + BlancoNameAdjuster.toClassName(structure.getValidator()) + "RuleSchema()";

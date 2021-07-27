@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * BlancoValueObject で作成されているObjectの一覧を XML から取得し，保持しておきます
+ * Obtains the list of Object created in BlancoValueObject from XML and stores it.
  *
  * Created by tueda on 15/07/05.
  */
@@ -20,7 +20,7 @@ public class BlancoVeeValidateUtil {
 
     public static Map<String, BlancoValueObjectTsClassStructure> objects = new HashMap<>();
     /**
-     * 多言語メッセージのクラス名を保持します。
+     * Contains the class name of the multilingual message.
      * K: lang
      * V: ValidationMessage[lang]
      */
@@ -31,9 +31,9 @@ public class BlancoVeeValidateUtil {
             System.out.println("BlancoVeeValidateUtil : processValueObjects start !");
         }
 
-        /* tmpdir はユニーク */
+        /* tmpdir is unique. */
         String baseTmpdir = input.getTmpdir();
-        /* searchTmpdir はカンマ区切り */
+        /* searchTmpdir is comma separated. */
         String tmpTmpdirs = input.getSearchTmpdir();
         List<String> searchTmpdirList = null;
         if (tmpTmpdirs != null && !tmpTmpdirs.equals(baseTmpdir)) {
@@ -52,7 +52,7 @@ public class BlancoVeeValidateUtil {
 
     static private void searchTmpdir(String tmpdir) {
 
-        // XML化された中間ファイルから情報を読み込む
+        // Reads information from XML-ized intermediate files.
         final File[] fileMeta3 = new File(tmpdir
                 + BlancoVeeValidateConstants.OBJECT_SUBDIRECTORY)
                 .listFiles();
@@ -71,8 +71,8 @@ public class BlancoVeeValidateUtil {
             BlancoValueObjectTsXmlParser parser = new BlancoValueObjectTsXmlParser();
 //            parser.setVerbose(this.isVerbose());
             /*
-             * まず始めにすべてのシートを検索して，クラス名とpackage名のリストを作ります．
-             * php形式の定義書では，クラスを指定する際にpackage名が指定されていないからです．
+             * First, it searches all the sheets and make a list of class and package names.
+             * This is because in the php-style definitions, the package name is not specified when specifying class.
              */
             final BlancoValueObjectTsClassStructure[] structures = parser.parse(fileMeta3[index]);
 
@@ -135,7 +135,7 @@ public class BlancoVeeValidateUtil {
     }
 
     /**
-     * インポート文を生成する
+     * Generates an import statement.
      * @param argPackageName
      * @param argClassName
      * @param argImportHeaderList
@@ -194,7 +194,7 @@ public class BlancoVeeValidateUtil {
     }
 
     /**
-     * importHeaderList に重複のチェックだけをして追加します。
+     * Adds to importHeaderList with only checking for duplicates.
      *
      * @param argClassName
      * @param importFrom
@@ -249,14 +249,14 @@ public class BlancoVeeValidateUtil {
         } else if ("object".equalsIgnoreCase(phpType)) {
             targetType = "any";
         } else {
-            /* この名前の package を探す */
+            /* Searches for a package with this name. */
             BlancoValueObjectTsClassStructure voStructure = BlancoVeeValidateUtil.objects.get(phpType);
 
             if (voStructure != null) {
                 String tmpPhpType = phpType;
                 String packageName = voStructure.getPackage();
                 if (packageName == null || packageName.length() == 0) {
-                    // package 名の分離を試みる
+                    // Tries to isolate the package name.
                     String simpleName = BlancoVeeValidateUtil.getSimpleClassName(tmpPhpType);
                     if (simpleName != null && !simpleName.equals(phpType)) {
                         packageName = BlancoVeeValidateUtil.getPackageName(tmpPhpType);
@@ -267,12 +267,12 @@ public class BlancoVeeValidateUtil {
                     targetType = packageName + "." + tmpPhpType;
                 }
 
-                /* その他はそのまま記述する */
+                /* Others are written as is. */
 //                System.out.println("/* tueda */ Unknown php type: " + targetType);
 
                 /*
-                 * TypeScript 用 import 情報の作成
-                 * コンポーネントとはパッケージが同じでもbasedirが違う可能性がある事に注意。
+                 * Creates import information for TypeScript.
+                 * Note that the package may be the same as the component, but the basedir may be different.
                  */
                 if (argObjClassStructure.getCreateImportList()) {
                     BlancoVeeValidateUtil.makeImportHeaderList(packageName, phpType, argImportHeaderList, voStructure.getBasedir(), "", false);

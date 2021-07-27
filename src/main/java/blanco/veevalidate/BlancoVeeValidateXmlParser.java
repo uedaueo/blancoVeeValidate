@@ -28,13 +28,13 @@ import java.io.File;
 import java.util.*;
 
 /**
- * blancoValueObjectの 中間XMLファイル形式をパース(読み書き)するクラス。
+ * A class that parses (reads and writes) the intermediate XML file format of blancoValueObject.
  *
  * @author IGA Tosiki
  */
 public class BlancoVeeValidateXmlParser {
     /**
-     * メッセージ。
+     * A message.
      */
     private final BlancoVeeValidateMessage fMsg = new BlancoVeeValidateMessage();
 
@@ -49,14 +49,14 @@ public class BlancoVeeValidateXmlParser {
     }
 
     /**
-     * blancoValueObjectのリソースバンドルオブジェクト。
+     * Resource bundle object for blancoValueObject.
      */
     private final static BlancoVeeValidateResourceBundle fBundle = new BlancoVeeValidateResourceBundle();
 
     public static Map<String, Integer> mapCommons = new HashMap<String, Integer>() {
         {
             put(fBundle.getMeta2xmlElementCommon(), BlancoCgSupportedLang.PHP);
-        } // PHP タイプシートにのみ対応
+        } // Supports for PHP-type sheets.
 
         {
             put(fBundle.getMeta2xmlElementCommonCs(), BlancoCgSupportedLang.CS);
@@ -92,10 +92,10 @@ public class BlancoVeeValidateXmlParser {
     };
 
     /**
-     * 中間XMLファイルのXMLドキュメントをパースして、バリューオブジェクト情報の配列を取得します。
+     * Parses an XML document in an intermediate XML file to get an array of information.
      *
-     * @param argMetaXmlSourceFile 中間XMLファイル。
-     * @return パースの結果得られたバリューオブジェクト情報の配列。
+     * @param argMetaXmlSourceFile An intermediate XML file.
+     * @return An array of information obtained as a result of parsing.
      */
     public BlancoVeeValidateClassStructure[] parse(
             final File argMetaXmlSourceFile) {
@@ -110,24 +110,24 @@ public class BlancoVeeValidateXmlParser {
     }
 
     /**
-     * 中間XMLファイル形式のXMLドキュメントをパースして、バリューオブジェクト情報の配列を取得します。
+     * Parses an XML document in an intermediate XML file to get an array of value object information.
      *
-     * @param argXmlDocument 中間XMLファイルのXMLドキュメント。
-     * @return パースの結果得られたバリューオブジェクト情報の配列。
+     * @param argXmlDocument XML document of an intermediate XML file.
+     * @return An array of value object information obtained as a result of parsing.
      */
     public BlancoVeeValidateClassStructure[] parse(
             final BlancoXmlDocument argXmlDocument) {
         final List<BlancoVeeValidateClassStructure> listStructure = new ArrayList<BlancoVeeValidateClassStructure>();
 
-        // ルートエレメントを取得します。
+        // Gets the root element.
         final BlancoXmlElement elementRoot = BlancoXmlBindingUtil
                 .getDocumentElement(argXmlDocument);
         if (elementRoot == null) {
-            // ルートエレメントが無い場合には処理中断します。
+            // The process is aborted if there is no root element.
             return null;
         }
 
-        // sheet(Excelシート)のリストを取得します。
+        // Gets a list of sheets (Excel sheets).
         final List<BlancoXmlElement> listSheet = BlancoXmlBindingUtil
                 .getElementsByTagName(elementRoot, "sheet");
 
@@ -136,7 +136,7 @@ public class BlancoVeeValidateXmlParser {
             final BlancoXmlElement elementSheet = listSheet.get(index);
 
             /*
-             * Java以外の言語用に記述されたシートにも対応．
+             * Supports sheets written for languages other than Java.
              */
             List<BlancoXmlElement> listCommon = null;
             int sheetLang = BlancoCgSupportedLang.JAVA;
@@ -165,11 +165,11 @@ public class BlancoVeeValidateXmlParser {
             }
 
             if (listCommon == null || listCommon.size() == 0) {
-                // commonが無い場合にはスキップします。
+                // Skips if there is no common.
                 continue;
             }
 
-            // 最初のアイテムのみ処理しています。
+            // Processes only the first item.
             final BlancoXmlElement elementCommon = listCommon.get(0);
             final String name = BlancoXmlBindingUtil.getTextContent(
                     elementCommon, "name");
@@ -186,9 +186,9 @@ public class BlancoVeeValidateXmlParser {
             ;
 
             if (objClassStructure != null) {
-                // 得られた情報を記憶します。
+                // Stores the obtained information.
                 listStructure.add(objClassStructure);
-                /* メッセージの lang 情報を保存します。 */
+                /* Saves the lang information of the message. */
                 for (BlancoVeeValidateMessageStructure message : objClassStructure.getMessage()) {
                     String lang = message.getLang();
                     System.out.println("!!! message lang = " + lang);
@@ -206,10 +206,10 @@ public class BlancoVeeValidateXmlParser {
     }
 
     /**
-     * 中間XMLファイル形式の「sheet」XMLエレメント(PHP書式)をパースして、バリューオブジェクト情報を取得します。
+     * Parses the "sheet" XML element (PHP-format) in the intermediate XML file to get the value object information.
      *
-     * @param argElementSheet 中間XMLファイルの「sheet」XMLエレメント。
-     * @return パースの結果得られたバリューオブジェクト情報。「name」が見つからなかった場合には nullを戻します。
+     * @param argElementSheet "sheet" XML element in the intermediate XML file.
+     * @return Value object information obtained as a result of parsing. Null is returned if "name" is not found.
      */
     public BlancoVeeValidateClassStructure parseElementSheetPhp(
             final BlancoXmlElement argElementSheet
@@ -217,23 +217,23 @@ public class BlancoVeeValidateXmlParser {
 
         final BlancoVeeValidateClassStructure objClassStructure = new BlancoVeeValidateClassStructure();
         /*
-         * パラメータの型にVOが使われている際に生成するheaderListを。objClassStructure#importList に格納します。
+         * Stores the headerList generated when VO is used as the parameter type in objClass Structure#importList.
          */
         final Map<String, List<String>> importHeaderList = new HashMap<>();
 
-        // 共通情報を取得します。
+        // Gets the common information.
         final BlancoXmlElement elementCommon = BlancoXmlBindingUtil
                 .getElement(argElementSheet, fBundle
                         .getMeta2xmlElementCommon());
         if (elementCommon == null) {
-            // commonが無い場合には、このシートの処理をスキップします。
+            // Skips the processing of this sheet if there is no common.
             return null;
         }
 
         final String name = BlancoXmlBindingUtil.getTextContent(
                 elementCommon, "name");
         if (BlancoStringUtil.null2Blank(name).trim().length() == 0) {
-            // nameが空の場合には処理をスキップします。
+            // Skips if name is empty.
             return null;
         }
 
@@ -241,10 +241,10 @@ public class BlancoVeeValidateXmlParser {
             System.out.println("BlancoVeeValidate#parseElementPhp name = " + name);
         }
 
-        // validate定義・共通
+        // validate definition common
         this.parseVeeValidateCommon(elementCommon, importHeaderList, objClassStructure);
 
-        // validate定義・継承
+        // validate definition inheritance
         final List<BlancoXmlElement> extendsList = BlancoXmlBindingUtil
                 .getElementsByTagName(argElementSheet, fBundle.getMeta2xmlElementExtends());
         if (extendsList != null && extendsList.size() != 0) {
@@ -252,7 +252,7 @@ public class BlancoVeeValidateXmlParser {
             parseVeeValidateExtends(elementExtendsRoot, importHeaderList, objClassStructure);
         }
 
-        // Validate定義・メッセージ
+        // validate definition message
         final List<BlancoXmlElement> messageList = BlancoXmlBindingUtil
                 .getElementsByTagName(argElementSheet, fBundle.getMeta2xmlElementMessage());
         if (messageList != null && messageList.size() != 0) {
@@ -261,7 +261,7 @@ public class BlancoVeeValidateXmlParser {
         }
 
 
-        // validate定義・パラメータ
+        // validate definition parameter
         final List<BlancoXmlElement> listList = BlancoXmlBindingUtil
                 .getElementsByTagName(argElementSheet, fBundle.getMeta2xmlElementList());
         if (listList != null && listList.size() != 0) {
@@ -269,7 +269,7 @@ public class BlancoVeeValidateXmlParser {
             this.parseVeeValidateProperties(elementListRoot, importHeaderList, objClassStructure);
         }
 
-        // ヘッダ情報を取得します。
+        // Gets the header information.
         List<BlancoXmlElement> headerElementList = BlancoXmlBindingUtil
                 .getElementsByTagName(argElementSheet,
                         fBundle.getMeta2xmlElementHeader());
@@ -297,22 +297,22 @@ public class BlancoVeeValidateXmlParser {
                 continue;
             }
 
-            // ルートエレメントを取得します。
+            // Gets the root element.
             final BlancoXmlElement elementRoot = BlancoXmlBindingUtil
                     .getDocumentElement(documentMeta);
             if (elementRoot == null) {
-                // ルートエレメントが無い場合には処理中断します。
+                // The process is aborted if there is no root element.
                 continue;
             }
 
-            // sheet(Excelシート)のリストを取得します。
+            // Gets a list of sheets (Excel sheets).
             final List<BlancoXmlElement> listSheet = BlancoXmlBindingUtil
                     .getElementsByTagName(elementRoot, "sheet");
 
 
             for (BlancoXmlElement elementSheet : listSheet) {
                 /*
-                 * Java以外の言語用に記述されたシートにも対応．
+                 * Supports sheets written for languages other than Java.
                  */
                 List<BlancoXmlElement> listCommon = null;
                 for (String common : mapCommons.keySet()) {
@@ -339,7 +339,7 @@ public class BlancoVeeValidateXmlParser {
     }
 
     /**
-     * 中間XMLファイルをパースして、「Validate定義・共通」を取得します。
+     * Parse the intermediate XML file to get the "validate definition common".
      *
      * @param argElementCommon
      * @param argObjClassStructure
@@ -372,8 +372,8 @@ public class BlancoVeeValidateXmlParser {
                 if (index == 0) {
                     argObjClassStructure.setDescription(lines[index]);
                 } else {
-                    // 複数行の description については、これを分割して格納します。
-                    // ２行目からは、適切に文字参照エンコーディングが実施されているものと仮定します。
+                    // For a multi-line description, it will be split and stored.
+                    // From the second line, assumes that character reference encoding has been properly implemented. 
                     argObjClassStructure.getDescriptionList().add(lines[index]);
                 }
             }
@@ -382,7 +382,7 @@ public class BlancoVeeValidateXmlParser {
                 argElementCommon, "fileDescription"));
 
         /*
-         * validatorの種類： builtin, custom, config, message
+         * validator types:  builtin, custom, config, message
          */
         argObjClassStructure.setValidatorKind(BlancoXmlBindingUtil.getTextContent(
                 argElementCommon, "validatorKind"));
@@ -404,9 +404,9 @@ public class BlancoVeeValidateXmlParser {
 
 
         /*
-         * RuleSchema のための import文を生成しておく
-         * message では import の自動生成は必要ない。
-         * config では使っているすべてのvalidatorを、別途importする必要がある
+         * Generate an import statement for RuleSchema.
+         * Auto-generation of import is not required for message.
+         * In config, it needs to import all the validators it is using separately.
          */
         String kind = argObjClassStructure.getValidatorKind();
         if (!"message".equalsIgnoreCase(kind) && argObjClassStructure.getCreateImportList()) {
@@ -425,7 +425,7 @@ public class BlancoVeeValidateXmlParser {
     }
 
     /**
-     * 中間XMLファイル形式のXMLドキュメントをパースして、「電文定義・継承」を取得します。
+     * Parses an XML document in an intermediate XML file to get "validate definition inheritance".
      * @param argElementExtendsRoot
      * @param argImportHeaderList
      * @param argClassStructure
@@ -441,7 +441,7 @@ public class BlancoVeeValidateXmlParser {
             String packageName = BlancoXmlBindingUtil.getTextContent(argElementExtendsRoot, "package");
             if (packageName == null) {
                 /*
-                 * このクラスのパッケージ名を探す
+                 * Searches for the package name for this class.
                  */
                 BlancoValueObjectTsClassStructure voStructure = BlancoVeeValidateUtil.objects.get(className);
                 if (voStructure != null) {
@@ -457,7 +457,7 @@ public class BlancoVeeValidateXmlParser {
             argClassStructure.setExtends(classNameCanon);
 
             /*
-             * TypeScript 用 import 情報の作成
+             * Creates import information for TypeScript.
              */
             if (argClassStructure.getCreateImportList()) {
                 BlancoVeeValidateUtil.makeImportHeaderList(packageName, className, argImportHeaderList, argClassStructure.getBasedir(), argClassStructure.getPackage(), false);
@@ -516,24 +516,24 @@ public class BlancoVeeValidateXmlParser {
             }
 
             /*
-             * 型の取得．ここで TypeScript 風の型名に変えておく
+             * Gets the type. Changes the type name to TypeScript style here.
              */
             String phpType = BlancoXmlBindingUtil.getTextContent(elementList, "type");
             String targetType = BlancoVeeValidateUtil.parsePhpTypes(phpType, argObjClassStructure, argImportHeaderList, false);
             fieldStructure.setType(targetType);
 
-            /* Generic に対応 */
+            /* Supports Generic. */
             String phpGeneric = BlancoXmlBindingUtil.getTextContent(elementList, "generic");
             if (BlancoStringUtil.null2Blank(phpGeneric).length() != 0) {
                 String targetGeneric = BlancoVeeValidateUtil.parsePhpTypes(phpGeneric, argObjClassStructure, argImportHeaderList, true);
                 fieldStructure.setGeneric(targetGeneric);
             }
 
-            // Nullable に対応
+            // Supports Nullable.
             fieldStructure.setNullable("true".equals(BlancoXmlBindingUtil
                     .getTextContent(elementList, "nullable")));
 
-            // 説明
+            // Description
             fieldStructure.setDescription(BlancoXmlBindingUtil
                     .getTextContent(elementList, "description"));
             final String[] lines = BlancoNameUtil.splitString(
@@ -542,18 +542,18 @@ public class BlancoVeeValidateXmlParser {
                 if (indexLine == 0) {
                     fieldStructure.setDescription(lines[indexLine]);
                 } else {
-                    // 複数行の description については、これを分割して格納します。
-                    // ２行目からは、適切に文字参照エンコーディングが実施されているものと仮定します。
+                    // For a multi-line description, it will be split and stored.
+                    // From the second line, assumes that character reference encoding has been properly implemented.   
                     fieldStructure.getDescriptionList().add(
                             lines[indexLine]);
                 }
             }
 
-            // デフォルト
+            // Default
             fieldStructure.setDefault(BlancoXmlBindingUtil.getTextContent(
                     elementList, "default"));
 
-            // 必須
+            // Required
             fieldStructure.setNullable("true".equals(BlancoXmlBindingUtil
                     .getTextContent(elementList, "required")));
 
@@ -580,8 +580,8 @@ public class BlancoVeeValidateXmlParser {
         List<String> headerList = new ArrayList<>();
 
         /*
-         * header の一覧作成
-         * まず、定義書に書かれたものをそのまま出力します。
+         * Creates a list of header.
+         * First, outputs what is written in the definition as it is.
          */
         if (argHeaderElementList != null && argHeaderElementList.size() > 0) {
             final BlancoXmlElement elementHeaderRoot = argHeaderElementList.get(0);
@@ -606,20 +606,20 @@ public class BlancoVeeValidateXmlParser {
         }
 
         /*
-         * 次に、自動生成されたものを出力します。
-         * 現在の方式だと、以下の前提が必要。
-         *  * 1ファイルに1クラスの定義
-         *  * 定義シートでは Java/kotlin 式の package 表記でディレクトリを表現
-         * TODO: 定義シート上にファイルの配置ディレクトリを定義できるようにすべし？
+         * Next, outputs the auto-generated one.
+         * The current method requires the following assumptions.
+         *  * One class definition per file
+         *  * Represents directories with Java/Kotlin style package notation in the definition sheet
+         * TODO: Should it be possible to define the directory where the files are located on the definition sheet?
          */
         this.parseGeneratedHeaderList(headerList, argImportHeaderList, false);
 
         /*
-         * 次に、expor default されたものを出力します。
-         * 現在の方式だと、以下の前提が必要。
-         *  * 1ファイルに1クラスの定義
-         *  * 定義シートでは Java/kotlin 式の package 表記でディレクトリを表現
-         * TODO: 定義シート上にファイルの配置ディレクトリを定義できるようにすべし？
+         * Then, outputs the default exported.
+         * The current method requires the following assumptions.
+         *  * One class definition per file
+         *  * Represents directories with Java/Kotlin style package notation in the definition sheet
+         * TODO: Should it be possible to define the directory where the files are located on the definition sheet?
          */
         if (argDefaultExportedHeaderList != null && argDefaultExportedHeaderList.size() > 0) {
             this.parseGeneratedHeaderList(headerList, argDefaultExportedHeaderList, true);
