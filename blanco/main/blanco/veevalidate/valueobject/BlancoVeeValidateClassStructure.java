@@ -616,12 +616,12 @@ public class BlancoVeeValidateClassStructure {
     }
 
     /**
-     * このバリューオブジェクトを指定のターゲットに複写します。
+     * Copies this value object to the specified target.
      *
-     * <P>使用上の注意</P>
+     * <P>Cautions for use</P>
      * <UL>
-     * <LI>オブジェクトのシャロー範囲のみ複写処理対象となります。
-     * <LI>オブジェクトが循環参照している場合には、このメソッドは使わないでください。
+     * <LI>Only the shallow range of the object will be subject to the copying process.
+     * <LI>Do not use this method if the object has a circular reference.
      * </UL>
      *
      * @param target target value object.
@@ -647,10 +647,10 @@ public class BlancoVeeValidateClassStructure {
         target.fValidator = this.fValidator;
         // Name: fImportList
         // Type: java.util.List
-        // フィールド[fImportList]はサポート外の型[java.util.Listjava.lang.String]です。
+        // Field[fImportList] is an unsupported type[java.util.Listjava.lang.String].
         // Name: fHeaderList
         // Type: java.util.List
-        // フィールド[fHeaderList]はサポート外の型[java.util.Listjava.lang.String]です。
+        // Field[fHeaderList] is an unsupported type[java.util.Listjava.lang.String].
         // Name: fBasedir
         // Type: java.lang.String
         target.fBasedir = this.fBasedir;
@@ -662,7 +662,7 @@ public class BlancoVeeValidateClassStructure {
         target.fDescription = this.fDescription;
         // Name: fDescriptionList
         // Type: java.util.List
-        // フィールド[fDescriptionList]はサポート外の型[java.util.Listjava.lang.String]です。
+        // Field[fDescriptionList] is an unsupported type[java.util.Listjava.lang.String].
         // Name: fValidatorKind
         // Type: java.lang.String
         target.fValidatorKind = this.fValidatorKind;
@@ -683,12 +683,12 @@ public class BlancoVeeValidateClassStructure {
         target.fExtends = this.fExtends;
         // Name: fFieldList
         // Type: java.util.List
-        // フィールド[fFieldList]はサポート外の型[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure]です。
+        // Field[fFieldList] is an unsupported type[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateFieldStructure].
         // Name: fFileDescription
         // Type: java.lang.String
         target.fFileDescription = this.fFileDescription;
         // Name: fMessage
         // Type: java.util.List
-        // フィールド[fMessage]はサポート外の型[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure]です。
+        // Field[fMessage] is an unsupported type[java.util.Listblanco.veevalidate.valueobject.BlancoVeeValidateMessageStructure].
     }
 }
