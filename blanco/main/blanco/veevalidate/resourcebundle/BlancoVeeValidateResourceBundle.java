@@ -1016,18 +1016,18 @@ public class BlancoVeeValidateResourceBundle {
     }
 
     /**
-     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATE.RULE.SCHEMA]
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATE.REDEFINE.TYPES]
      *
-     * [VeeValidateのValidateRuleSchemaの実装クラスです。] (ja)<br>
+     * [この型はVeeValidate内で定義されていますがexportされていないので再定義しています。] (ja)<br>
      *
-     * @return key[XML2SOURCE_FILE.VALIDATE.RULE.SCHEMA]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     * @return key[XML2SOURCE_FILE.VALIDATE.REDEFINE.TYPES]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
      */
-    public String getXml2sourceFileValidateRuleSchema() {
+    public String getXml2sourceFileValidateRedefineTypes() {
         // 初期値として定義書の値を利用します。
-        String strFormat = "VeeValidateのValidateRuleSchemaの実装クラスです。";
+        String strFormat = "この型はVeeValidate内で定義されていますがexportされていないので再定義しています。";
         try {
             if (fResourceBundle != null) {
-                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATE.RULE.SCHEMA");
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATE.REDEFINE.TYPES");
             }
         } catch (MissingResourceException ex) {
         }
@@ -1036,18 +1036,238 @@ public class BlancoVeeValidateResourceBundle {
     }
 
     /**
-     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATE.MESSAGE]
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.FIELD]
+     *
+     * [FIELD の項目名（name）またはラベル（label）] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.FIELD]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoField() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "FIELD の項目名（name）またはラベル（label）";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.FIELD");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.VALUE]
+     *
+     * [FIELD の現在の値] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.VALUE]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoValue() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "FIELD の現在の値";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.VALUE");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.FORM]
+     *
+     * [FORM 内の他の値] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.FORM]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoForm() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "FORM 内の他の値";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.FORM");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.NAME]
+     *
+     * [ルール名] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.NAME]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoRuleName() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "ルール名";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.NAME");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.PARAMS]
+     *
+     * [ルールのパラメータ] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.PARAMS]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoRuleParams() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "ルールのパラメータ";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.RULE.PARAMS");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE]
+     *
+     * [ルールの名前とパラメータを表すインタフェイスです。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.META.INFO.RULE]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationMetaInfoRule() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "ルールの名前とパラメータを表すインタフェイスです。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.META.INFO.RULE");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.MESSAGE]
      *
      * [VeeValidateのカスタムメッセージを定義するクラスです。] (ja)<br>
      *
-     * @return key[XML2SOURCE_FILE.VALIDATE.MESSAGE]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     * @return key[XML2SOURCE_FILE.VALIDATION.MESSAGE]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
      */
-    public String getXml2sourceFileValidateMessage() {
+    public String getXml2sourceFileValidationMessage() {
         // 初期値として定義書の値を利用します。
         String strFormat = "VeeValidateのカスタムメッセージを定義するクラスです。";
         try {
             if (fResourceBundle != null) {
-                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATE.MESSAGE");
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.MESSAGE");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.LANGDOC]
+     *
+     * [vee-validate/i18n で定義されたメッセージテンプレートのプレースホルダを値に置き換えます。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.LANGDOC]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationInterporatorLangdoc() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "vee-validate/i18n で定義されたメッセージテンプレートのプレースホルダを値に置き換えます。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.INTERPORATOR.LANGDOC");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM01]
+     *
+     * [メッセージのテンプレートです。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM01]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationInterporatorParam01() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "メッセージのテンプレートです。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM01");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM02]
+     *
+     * [プレースホルダと置換される値です。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM02]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationInterporatorParam02() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "プレースホルダと置換される値です。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.INTERPORATOR.PARAM02");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.RETURN]
+     *
+     * [プレースホルダ置換後のメッセージを返します。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.INTERPORATOR.RETURN]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationInterporatorReturn() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "プレースホルダ置換後のメッセージを返します。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.INTERPORATOR.RETURN");
+            }
+        } catch (MissingResourceException ex) {
+        }
+        // 置換文字列はひとつもありません。
+        return strFormat;
+    }
+
+    /**
+     * bundle[BlancoVeeValidate], key[XML2SOURCE_FILE.VALIDATION.CONFIG.OPTIONS]
+     *
+     * [configure 関数に渡すオプションの定義です。] (ja)<br>
+     *
+     * @return key[XML2SOURCE_FILE.VALIDATION.CONFIG.OPTIONS]に対応する値。外部から読み込みができない場合には、定義書の値を戻します。必ずnull以外の値が戻ります。
+     */
+    public String getXml2sourceFileValidationConfigOptions() {
+        // 初期値として定義書の値を利用します。
+        String strFormat = "configure 関数に渡すオプションの定義です。";
+        try {
+            if (fResourceBundle != null) {
+                strFormat = fResourceBundle.getString("XML2SOURCE_FILE.VALIDATION.CONFIG.OPTIONS");
             }
         } catch (MissingResourceException ex) {
         }
