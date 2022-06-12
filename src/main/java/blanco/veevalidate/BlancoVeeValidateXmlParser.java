@@ -373,7 +373,7 @@ public class BlancoVeeValidateXmlParser {
                     argObjClassStructure.setDescription(lines[index]);
                 } else {
                     // For a multi-line description, it will be split and stored.
-                    // From the second line, assumes that character reference encoding has been properly implemented. 
+                    // From the second line, assumes that character reference encoding has been properly implemented.
                     argObjClassStructure.getDescriptionList().add(lines[index]);
                 }
             }
@@ -411,8 +411,8 @@ public class BlancoVeeValidateXmlParser {
         String kind = argObjClassStructure.getValidatorKind();
         if (!"message".equalsIgnoreCase(kind) && argObjClassStructure.getCreateImportList()) {
             String validator = argObjClassStructure.getValidator();
-            String packageName = "dist.rules";
-            String impleDir = "vee-validate";
+            String packageName = "rules";
+            String impleDir = "@vee-validate";
             boolean isCustom = false;
             if ("custom".equalsIgnoreCase(kind)) {
                 validator += "Validator";
@@ -543,7 +543,7 @@ public class BlancoVeeValidateXmlParser {
                     fieldStructure.setDescription(lines[indexLine]);
                 } else {
                     // For a multi-line description, it will be split and stored.
-                    // From the second line, assumes that character reference encoding has been properly implemented.   
+                    // From the second line, assumes that character reference encoding has been properly implemented.
                     fieldStructure.getDescriptionList().add(
                             lines[indexLine]);
                 }

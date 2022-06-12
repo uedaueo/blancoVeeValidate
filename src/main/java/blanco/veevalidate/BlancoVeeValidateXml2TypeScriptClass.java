@@ -446,7 +446,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         // Then, sets up the custom rule.
         for (BlancoVeeValidateClassStructure structure : argClassStructures) {
             if ("custom".equalsIgnoreCase(structure.getValidatorKind())) {
-                String validator = BlancoNameAdjuster.toClassName(structure.getValidator()) + "Validator";
+                String validator = BlancoNameAdjuster.toParameterName(structure.getValidator()) + "Validator";
                 method.getLineList().add("defineRule(\"" +
                         structure.getName() + "\", " +
                         validator + ");");
@@ -668,15 +668,20 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         String packageName = argStructure.getPackage();
         String simpleClassName = BlancoNameAdjuster.toClassName(argStructure.getValidator()) + "Validator";
         String baseDir = argStructure.getBasedir();
+        String impleDir = argStructure.getImpledir();
 
         if (baseDir != null & baseDir.length() > 0) {
             baseDir += "/";
         }
+        if (impleDir != null & impleDir.length() > 0) {
+            impleDir += "/";
+        }
+
         if (packageName != null & packageName.length() > 0) {
             packageName += "/";
         }
         importString = "import { " + BlancoNameAdjuster.toParameterName(simpleClassName) + " } from \"" +
-                baseDir + packageName.replace(".", "/") + simpleClassName + "\"";
+                impleDir + packageName.replace(".", "/") + simpleClassName + "\"";
 
         return importString;
     }
