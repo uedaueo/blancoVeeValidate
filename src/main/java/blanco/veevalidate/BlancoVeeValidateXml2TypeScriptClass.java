@@ -624,16 +624,18 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         cgValidateConfig.setNotnull(true);
         cgValidateConfig.setAccess("export const");
 
+        String validateConfigClass = fCgClass.getName();
+
         StringBuffer sb = new StringBuffer();
         sb.append("{" + this.getLineSeparator());
         sb.append(this.getTabSpace(1) + "generateMessage: (ctx) => {" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "const {field, rule, form} = ctx;" + this.getLineSeparator());
 
-        sb.append(this.getTabSpace(2) + "if (!ValidateConfig.i18n) {" + this.getLineSeparator());
+        sb.append(this.getTabSpace(2) + "if (!" + validateConfigClass + ".i18n) {" + this.getLineSeparator());
         sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
 
-        sb.append(this.getTabSpace(2) + "const fieldName = ValidateConfig.i18n.global.t(field);" + this.getLineSeparator());
+        sb.append(this.getTabSpace(2) + "const fieldName = "+ validateConfigClass + ".i18n.global.t(field);" + this.getLineSeparator());
         sb.append(this.getTabSpace(2)  + "if (rule === undefined) {" + this.getLineSeparator());
         sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
@@ -643,7 +645,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         sb.append(this.getTabSpace(2) + " * we get raw messages from dictionary and pass it to interpolator" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + " */" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "const localeSettings = useLocaleSettingStore();" + this.getLineSeparator());
-        sb.append(this.getTabSpace(2) + "const localeMessages = ValidateConfig.i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;" + this.getLineSeparator());
+        sb.append(this.getTabSpace(2) + "const localeMessages = " + validateConfigClass + ".i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "if (localeMessages === undefined) {" + this.getLineSeparator());
         sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());

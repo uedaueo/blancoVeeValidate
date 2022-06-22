@@ -5,7 +5,7 @@
 	<groupId>blanco.veevalidate</groupId>
 	<artifactId>blanco-veevalidate</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>blanco-veevalidate</name>
 	<url>https://igapyon.github.io/blancofw-maven2</url>
 
