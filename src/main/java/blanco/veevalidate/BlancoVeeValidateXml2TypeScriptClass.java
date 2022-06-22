@@ -364,6 +364,14 @@ public class BlancoVeeValidateXml2TypeScriptClass {
             fCgClass.getLangDoc().getDescriptionList().add(line);
         }
 
+        // Generate i18n field
+        BlancoCgField cgI18nField = fCgFactory.createField("i18n", "I18n", fBundle.getXml2sourceFileValidateInitI18n());
+        fCgClass.getFieldList().add(cgI18nField);
+        cgI18nField.getType().setGenerics("LocaleMessages<VueMessageType>, unknown, unknown, false");
+        cgI18nField.setAccess("public");
+        cgI18nField.setStatic(true);
+        cgI18nField.setNotnull(false);
+
         // Generates the setup method.
         buildSetupMethod(argClassStructures, configStructure);
 
@@ -620,7 +628,12 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         sb.append("{" + this.getLineSeparator());
         sb.append(this.getTabSpace(1) + "generateMessage: (ctx) => {" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "const {field, rule, form} = ctx;" + this.getLineSeparator());
-        sb.append(this.getTabSpace(2) + "const fieldName = i18n.global.t(field);" + this.getLineSeparator());
+
+        sb.append(this.getTabSpace(2) + "if (!ValidateConfig.i18n) {" + this.getLineSeparator());
+        sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
+        sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
+
+        sb.append(this.getTabSpace(2) + "const fieldName = ValidateConfig.i18n.global.t(field);" + this.getLineSeparator());
         sb.append(this.getTabSpace(2)  + "if (rule === undefined) {" + this.getLineSeparator());
         sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
@@ -630,7 +643,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         sb.append(this.getTabSpace(2) + " * we get raw messages from dictionary and pass it to interpolator" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + " */" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "const localeSettings = useLocaleSettingStore();" + this.getLineSeparator());
-        sb.append(this.getTabSpace(2) + "const localeMessages = i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;" + this.getLineSeparator());
+        sb.append(this.getTabSpace(2) + "const localeMessages = ValidateConfig.i18n.global.getLocaleMessage(localeSettings.lang) as LocaleMessageDictionary;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "if (localeMessages === undefined) {" + this.getLineSeparator());
         sb.append(this.getTabSpace(3) + "return field;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
