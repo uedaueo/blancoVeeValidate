@@ -653,7 +653,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         sb.append(this.getLineSeparator());
 
         sb.append(this.getTabSpace(2) + "if (message === undefined) {" + this.getLineSeparator());
-        sb.append(this.getTabSpace(3) + "message = (localeMessages.validations as LocaleMessageDictionary)[\"_default\"] as string;" + this.getLineSeparator());
+        sb.append(this.getTabSpace(3) + "message = (localeMessages.validations as LocaleMessageDictionary<DapandaI18nResources>)[\"_default\"] as string;" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "}" + this.getLineSeparator());
         sb.append(this.getTabSpace(2) + "return interpolate(message, {...form, field: fieldName, params: rule.params});" + this.getLineSeparator());
         sb.append(this.getTabSpace(1) + "}" + this.getLineSeparator());
