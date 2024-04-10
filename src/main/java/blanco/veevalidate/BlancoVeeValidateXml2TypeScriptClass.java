@@ -367,7 +367,7 @@ public class BlancoVeeValidateXml2TypeScriptClass {
         // Generate i18n field
         BlancoCgField cgI18nField = fCgFactory.createField("i18n", "I18n", fBundle.getXml2sourceFileValidateInitI18n());
         fCgClass.getFieldList().add(cgI18nField);
-        cgI18nField.getType().setGenerics("LocaleMessages<DapandaI18nResources>, unknown, unknown, string, false");
+        cgI18nField.getType().setGenerics("LocaleMessages<DapandaI18nResources>, any, any, string, false");
         cgI18nField.setAccess("public");
         cgI18nField.setStatic(true);
         cgI18nField.setNotnull(false);
