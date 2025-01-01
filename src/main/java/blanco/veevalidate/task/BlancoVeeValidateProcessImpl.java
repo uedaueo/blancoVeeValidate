@@ -19,7 +19,9 @@ import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BlancoVeeValidateProcessImpl implements BlancoVeeValidateProcess {
 
@@ -123,6 +125,7 @@ public class BlancoVeeValidateProcessImpl implements BlancoVeeValidateProcess {
             BlancoVeeValidateUtil.processValueObjects(input);
 
             List<BlancoVeeValidateClassStructure> validatorStructures = new ArrayList<>();
+            List<BlancoVeeValidateClassStructure> sortedValidatorStructures = new ArrayList<>();
 
             // Next, scans the directory specified as the meta directory.
             for (int index = 0; index < fileMeta2.length; index++) {
@@ -143,6 +146,20 @@ public class BlancoVeeValidateProcessImpl implements BlancoVeeValidateProcess {
                 }
             }
 
+            /* sort validatorStructures */
+            if (validatorStructures.size() == 1) {
+                sortedValidatorStructures.add(validatorStructures.get(0));
+            } else if (validatorStructures.size() > 1) {
+                sortedValidatorStructures = validatorStructures.stream().sorted(
+                        new Comparator<BlancoVeeValidateClassStructure>() {
+                            @Override
+                            public int compare(BlancoVeeValidateClassStructure o1, BlancoVeeValidateClassStructure o2) {
+                                return o1.getName().compareTo(o2.getName());
+                            }
+                        }
+                ).collect(Collectors.toList());
+            }
+
             /*
              * Then, generates the ValidateInitializer class.
              */
@@ -153,7 +170,7 @@ public class BlancoVeeValidateProcessImpl implements BlancoVeeValidateProcess {
             xml2Class.setXmlRootElement(input.getXmlrootelement());
             xml2Class.setSheetLang(new BlancoCgSupportedLang().convertToInt(input.getSheetType()));
             xml2Class.setTabs(input.getTabs());
-            xml2Class.process(validatorStructures, new File(strTarget));
+            xml2Class.process(sortedValidatorStructures, new File(strTarget));
 
             return BlancoVeeValidateBatchProcess.END_SUCCESS;
         } catch (TransformerException e) {
